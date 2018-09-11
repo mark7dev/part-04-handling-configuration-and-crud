@@ -4,9 +4,11 @@ const Companies = require('../controllers/Companies.js')
 
 //Declaras las peticiones configuradas
 app.get('/companies', Companies.index);
-app.get('/companies/:id', Companies.id);
+// app.get('/companies/:id', Companies.id);
 app.post('/companies', Companies.create);
 app.put('/companies/:id', Companies.update);
 app.delete('/companies/:id', Companies.delete);
+
+app.get('/companies/:companyId', Companies.getById);
 
 module.exports = app;

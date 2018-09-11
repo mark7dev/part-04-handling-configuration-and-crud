@@ -3,6 +3,7 @@ const chalk = require('chalk');
 const express = require('express');
 const logger = require('morgan');
 const api =require('./src/routes/api');
+const mongoose = require('mongoose');
 
 /**
  * [1] Create and instantiate the Node server.
@@ -13,6 +14,17 @@ const app = express();
 
 // Change PORT to "xxxx" (jason) if this port is occuped then run on 3000
 const PORT = process.env.PORT || 3000;
+
+//Configuring moongoose
+mongoose.connect('mongodb://localhost:27017/apirest', {
+  useNewUrlParser: true
+});
+
+mongoose.connection.on('connected', () => {
+  console.log('Successful')
+});
+
+
 
 /**
  * [1] Views Configuration
