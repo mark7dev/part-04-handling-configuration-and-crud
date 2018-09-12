@@ -44,7 +44,7 @@ const Controller = {
 
     create: (request, response) => {
         const newJob = new Job({
-            id: new mongoose.Types.ObjectId(),
+            _id: new mongoose.Types.ObjectId(),
             description: request.body.description,
             hiringDate: request.body.hiringDate,
             salary: request.body.salary,

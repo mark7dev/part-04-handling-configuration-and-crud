@@ -1,9 +1,14 @@
+// Adding dotenv
+require('dotenv').config()
+
 /* Import the modules. */
 const chalk = require('chalk');
 const express = require('express');
 const logger = require('morgan');
 const api =require('./src/routes/api');
 const mongoose = require('mongoose');
+
+
 
 /**
  * [1] Create and instantiate the Node server.
@@ -15,10 +20,12 @@ const app = express();
 // Change PORT to "xxxx" (jason) if this port is occuped then run on 3000
 const PORT = process.env.PORT || 3000;
 
+
 //Configuring moongoose
-mongoose.connect('mongodb://localhost:27017/apirest', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true
 });
+// console.log(process.env.MONGODB_URI);
 
 mongoose.connection.on('connected', () => {
   console.log('Successful')
