@@ -8,11 +8,30 @@ const Controller = {
             .find()
             .exec()
             .then(data => {
-                response
-                    .json({
-                        companies: data
-                    })
-                    .status(200);
+                if (data.length === 0) {
+                    response
+                        .json({
+                            "data": "empty",
+                            "status": "200",
+                            "message": "No companies have been registered."
+                        })
+                        .status(200)
+                } else if (data.length === 1) {
+                    response
+                        .json({
+                            companies: data
+                        })
+                        .status(200)
+                } else ( 
+                    response
+                        .json({
+                            companies: 
+                                data.length,
+                                data
+                        })
+                        .status(200)
+                )
+                    
             });
         // response
         // .status(200)
