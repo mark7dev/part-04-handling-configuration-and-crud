@@ -7,7 +7,11 @@ const Schema = new mongoose.Schema({
     salary: Number,
     location: { type: String, required: true },
     contactEmail: { type: String, required: true },
-    isStillvailable: { type: Boolean, default: true }
+    isStillvailable: { type: Boolean, default: true },
+    company: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Company'
+    }
 });
 
 module.exports = mongoose.model('Job', Schema);

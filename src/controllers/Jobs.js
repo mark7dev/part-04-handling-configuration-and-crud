@@ -5,13 +5,14 @@ const Controller = {
     index: (request, response) => {
         Job
             .find()
+            .populate('company')
             .exec()
             .then(data => {
                 response
+                    .status(200)
                     .json({
                         jobs: data
-                    })
-                    .status(200);
+                    });
             })
             .catch(error => {
                 response
@@ -25,6 +26,8 @@ const Controller = {
     findBy: (request, response) => {
         Job
            .findById(request.params.jobId)
+           .populate('company')
+           .exec()
            .then(data => {
                 response
                     .json({
@@ -50,7 +53,8 @@ const Controller = {
             salary: request.body.salary,
             location: request.body.location,
             contactEmail: request.body.contactEmail,
-            isStillAvailable: request.body.isStillAvailable
+            isStillAvailable: request.body.isStillAvailable,
+            company: request.body.company
         });
 
         newJob

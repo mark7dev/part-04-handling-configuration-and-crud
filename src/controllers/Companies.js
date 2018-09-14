@@ -25,8 +25,9 @@ const Controller = {
                 } else ( 
                     response
                         .json({
+                            total: data.length,
                             companies: 
-                                data.length,
+                                // data.length,
                                 data
                         })
                         .status(200)
@@ -88,17 +89,17 @@ const Controller = {
             .save()
             .then(data => {
                 response
+                    .status(201)
                     .json({
                         data: newCompany
-                    })
-                    .status(201);
+                    });
             })
             .catch(error => {
                 response
+                .status(500)
                 .json({
                     message: error
                 })
-                .status(500)
             });
 
             console.log('raw record: ' , newCompany)
