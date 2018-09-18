@@ -76,7 +76,7 @@ app.get('/', (request, response) => {
 
 //Setting CORS
 app.use((request, response, next) => {
-  response.header('Accsess-Control-Allow-Origin', '*');
+  response.header('Access-Control-Allow-Origin', '*');
   response.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
