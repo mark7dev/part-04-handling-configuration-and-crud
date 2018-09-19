@@ -2,6 +2,7 @@ const { Router } = require('express');
 const app = Router();
 const Companies = require('../controllers/Companies.js');
 const Jobs = require('../controllers/Jobs.js')
+const User = require('../controllers/User');
 
 //Declaras las peticiones configuradas
 app.get('/companies', Companies.index);
@@ -18,6 +19,10 @@ app.get('/Jobs/:jobId', Jobs.findBy);
 app.post('/Jobs', Jobs.create);
 app.put('/Jobs/:jobId', Jobs.update);
 app.delete('/Jobs/:jobId', Jobs.delete);
+
+//User routes
+app.post('/auth/signup', User.create);
+
 
 
 module.exports = app;
