@@ -24,6 +24,7 @@ app.delete('/Jobs/:jobId', Jobs.delete);
 app.get('/users', User.index);
 app.delete('/users/:userId', User.remove);
 app.post('/auth/signup', User.create);
+app.post('/auth/login', User.login);
 
 
 

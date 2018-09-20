@@ -92,6 +92,30 @@ const Controller = {
                 message: 'User was deleted.'
               });
           });
+    },
+
+    //LOGIN mail validation
+    login: (request, response) => {
+        User
+            .find({
+                email: request.body.email
+            })
+            .exec()
+            .then(user => {
+                if (user.length > 0) {
+                    response
+                        .status(200)
+                        .json({
+                            user
+                        });
+                } else {
+                    response
+                        .status(404)
+                        .json({
+                            message: 'Email doesnt exists.'
+                        })
+                }
+            });
     }
     
 };
