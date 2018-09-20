@@ -4,7 +4,9 @@ const Schema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     email: {
         type: String,
-        required: true
+        required: true,
+        //Add a characteristec like Index
+        unique: true
     },
     password: {
         type: String,

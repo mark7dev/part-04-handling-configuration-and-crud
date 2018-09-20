@@ -78,7 +78,22 @@ const Controller = {
                         });
                 }
             })
+    },
+
+    //DELETE***
+    remove: (request, response) => {
+        User
+          .findByIdAndRemove(request.params.userId)
+          .exec()
+          .then(() => {
+            response
+              .status(200)
+              .json({
+                message: 'User was deleted.'
+              });
+          });
     }
+    
 };
 
 module.exports = Controller;
