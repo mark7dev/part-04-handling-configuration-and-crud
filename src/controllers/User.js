@@ -6,6 +6,7 @@ const User = require('../models/User');
 const Controller = {
     create: (request, response) => {
 
+        //Encrypting password
         bcrypt.hash(request.body.password, 10, (error, hash) => {
             if (error) {
                 return response
@@ -15,13 +16,23 @@ const Controller = {
                     })
             }
 
+            //Creating data
             const newUser = new User({
                 _id: new mongoose.Types.ObjectId(),
                 email: request.body.email,
                 password: hash
             });
 
-            console.log('new user created: ', newUser);
+            //Saving data
+            newUser
+                .save()
+                .then(saved => {
+                    response
+                        .status(201)
+                        .json({
+                            message: 'User created succesfully.'
+                        })
+                })
         }); 
     }
 };
