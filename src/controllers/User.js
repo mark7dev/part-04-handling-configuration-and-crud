@@ -102,17 +102,41 @@ const Controller = {
             })
             .exec()
             .then(user => {
+                //email matched
                 if (user.length > 0) {
-                    response
-                        .status(200)
-                        .json({
-                            user
-                        });
+                    //now check the password too
+                    bcrypt.compare(request.body.password, user[0].password, (error, result) => {
+                        //no match between password text plane and password in the data base
+                        if (error) {
+                            return response
+                                .status(401)
+                                .json({
+                                    message: 'Authentication failed.'
+                                })
+                        }
+
+                        //there is match
+                        if (result) {
+                            return response
+                                .status(200)
+                                .json({
+                                    message: 'Authentication successfull.'
+                                })
+                        }
+
+                        //no match for any way
+                        response
+                            .status(401)
+                            .json({
+                                message: 'Authentication failed.'
+                            })
+                    });
+                //email didn't match
                 } else {
                     response
-                        .status(404)
+                        .status(422)
                         .json({
-                            message: 'Email doesnt exists.'
+                            message: 'Authentication failed.'
                         })
                 }
             });
