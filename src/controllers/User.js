@@ -4,6 +4,30 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
 const Controller = {
+
+    //GET***
+    index: (request, response) => {
+        User
+            .find({})
+            .exec()
+            .then(users => {
+                response
+                    .status(200)
+                    .json({
+                        users,
+                        total: users.length
+                    });
+            })
+            .catch(error => {
+                response
+                    .status(500)
+                    .json({
+                        error
+                    });
+            });
+    },
+
+    //POST***
     create: (request, response) => {
 
         //Encrypting password
